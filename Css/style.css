@@ -16,6 +16,7 @@ body {
     margin: auto;
     width: 55%;
     height: 175px;
+    color: yellow;
 }
 
 #leagueLogo{
@@ -31,7 +32,6 @@ body {
     top: 30px;
     right: 20px;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    color: yellow;
     font-size: 100px;
 }
 
