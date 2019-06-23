@@ -54,7 +54,7 @@ var questionsList = [
 ];
 
 $('#startButton').on("click", function () {
-    $(this).hide();
+    $(this).parent().hide();
     startQuiz();
 });
 
