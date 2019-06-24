@@ -1,3 +1,6 @@
+//Global variables
+var timeRemaining = 15;
+
 //Define questions in an array using an object
 //List out answer choices in an array and define the answer
 var questionsList = [
@@ -32,7 +35,7 @@ var questionsList = [
         answer: "2",
     },
     {
-        question: "Which role is primarily responsible for taking the spell 'Smite'",
+        question: "Which role is primarily responsible for taking the spell 'Smite'?",
         answerList: ["AD Carry", "Support", "Tank", "Jungle"],
         answer: "",
     },
@@ -58,7 +61,36 @@ $('#startButton').on("click", function () {
     startQuiz();
 });
 
+$('#retryButton').on("click", function () {
+    $(this).parent().hide();
+    reset();
+    startQuiz();
+});
+
 function startQuiz(){
-    $("#quizContainer").show();
+    $('#quizContainer').show();
+    timeLeft();
+    displayQuestions();
 };
 
+function timeLeft () {
+    setInterval(time,1000);
+};
+
+function time() {
+    timeRemaining--;
+    $('#timeRemaining').text("Time Remaining: " + timeRemaining);
+    if (timeRemaining === 0) {
+        $('#quizContainer').hide();
+        $('#endContainer').show();
+    }
+}
+//Display Questions
+function displayQuestions() {
+    for (i=0; i < questionsList.length; i++) {
+        var createDiv = $("<div>");
+        var q = questionsList[i].question;
+        createDiv.append(q);
+        $("#questions").append(createDiv);
+    }
+};

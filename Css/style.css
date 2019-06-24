@@ -27,6 +27,7 @@ body {
     top: -100px;
     left: 15px;
 }
+
 #header {
     position: absolute;
     top: 30px;
@@ -63,6 +64,27 @@ body {
     color:yellow;
     font-size: 30px;
 }
+
 #timeRemaining {
-    padding: 30px 30px 70px;
+    padding: 30px 30px 30px;
+}
+
+#endContainer {
+    display: none;
+    position: absolute;
+    background-color:gray;
+    text-align: center;
+    left: 22.5%;
+    width: 55%;
+    height: 100%;
+    color:yellow;
+    font-size: 30px;
+}
+
+#questionsRight{
+    padding-top: 15%;
+}
+
+#questionsWrong{
+    padding-top: 20px;
 }
