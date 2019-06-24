@@ -1,5 +1,7 @@
 //Global variables
-var timeRemaining = 60;
+var timeRemaining = 10;
+var right = 0;
+var wrong = 0;
 
 //Define questions in an array using an object
 //List out answer choices in an array and define the answer
@@ -66,25 +68,27 @@ var questionsList = [
         name: "location"
     },
 ];
-
+//Start
 function startQuiz() {
     $('#quizContainer').show();
     timeLeft();
     displayQuestions();
 };
-
+//Countdown from 60
 function timeLeft() {
     setInterval(time, 1000);
+    function time() {
+        timeRemaining--;
+        $('#timeRemaining').text("Time Remaining: " + timeRemaining);
+        //Determining right/wrong answers for quiz
+        if (timeRemaining === 0) {
+            checkAnswers();
+            $('#quizContainer').hide();
+            $('#endContainer').show();
+        }
+    }
 };
 
-function time() {
-    timeRemaining--;
-    $('#timeRemaining').text("Time Remaining: " + timeRemaining);
-    if (timeRemaining === 0) {
-        $('#quizContainer').hide();
-        $('#endContainer').show();
-    }
-}
 //Display Questions
 function displayQuestions() {
     for (i = 0; i < questionsList.length; i++) {
@@ -95,7 +99,7 @@ function displayQuestions() {
         //Display choices
         var createDiv2 = $('<div>');
         for (j = 0; j < questionsList[i].answerList.length; j++) {
-            createDiv2.append('<input type="radio"  name=' + questionsList[i].name + ' value=' + questionsList[i].answerList[j] + '/><label>' + questionsList[i].answerList[j]) + '</label>';
+            createDiv2.append('<input type="radio"  name=' + questionsList[i].name + ' value=' + questionsList[i].answerList[j] + '><label>' + questionsList[i].answerList[j]) + '</label>';
         }
         //Append choices to question
         createDiv.append(createDiv2);
@@ -103,13 +107,28 @@ function displayQuestions() {
         $("#questions").append("<br>");
     }
 };
-
+//Run through array to check choices with answer
+function checkAnswers() {
+    for (k = 0; k < questionsList.length; k++) {
+        if ($('input:radio[name="' + questionsList[k].name + '"]:checked').val() === questionsList[k].answer) {
+            right++;
+        }
+        else {
+            wrong++;
+        }
+    }
+    $("#questionsRight").text("Questions Right: " + right);
+    $("#questionsWrong").text("Questions Wrong: " + wrong);
+}
+//Start button
 $('#startButton').on("click", function () {
     $(this).parent().hide();
     startQuiz();
 });
-
+//Submit button
 $('#submitButton').on("click", function () {
+    //Determining right/wrong answers for quiz
+    checkAnswers();
     $('#quizContainer').hide();
     $('#endContainer').show();
 });
