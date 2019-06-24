@@ -1,5 +1,6 @@
 //Global variables
-var timeRemaining = 60;
+var t = 60;
+var timeRemaining;
 var right = 0;
 var wrong = 0;
 
@@ -68,26 +69,35 @@ var questionsList = [
         name: "location"
     },
 ];
+
 //Start
 function startQuiz() {
     $('#quizContainer').show();
     timeLeft();
     displayQuestions();
 };
+
 //Countdown from 60
 function timeLeft() {
-    setInterval(time, 1000);
-    function time() {
-        timeRemaining--;
-        $('#timeRemaining').text("Time Remaining: " + timeRemaining);
-        //Determining right/wrong answers for quiz
-        if (timeRemaining === 0) {
-            checkAnswers();
-            $('#quizContainer').hide();
-            $('#endContainer').show();
-        }
-    }
+    timeRemaining = setInterval(decrement, 1000);
 };
+
+function decrement() {
+    t--;
+    console.log(t);
+    $('#timeRemaining').text("Time Remaining: " + t);
+    //Determining right/wrong answers for quiz
+    if (t === 0) {
+        stop();
+        checkAnswers();
+        $('#quizContainer').hide();
+        $('#endContainer').show();
+    }
+}
+
+function stop() {
+    clearInterval(timeRemaining);
+}
 
 //Display Questions
 function displayQuestions() {
@@ -107,6 +117,7 @@ function displayQuestions() {
         $("#questions").append("<br>");
     }
 };
+
 //Run through array to check choices with answer
 function checkAnswers() {
     for (k = 0; k < questionsList.length; k++) {
@@ -120,14 +131,17 @@ function checkAnswers() {
     $("#questionsRight").text("Questions Right: " + right);
     $("#questionsWrong").text("Questions Wrong: " + wrong);
 }
+
 //Start button
 $('#startButton').on("click", function () {
     $(this).parent().hide();
     startQuiz();
 });
+
 //Submit button
 $('#submitButton').on("click", function () {
     //Determining right/wrong answers for quiz
+    stop();
     checkAnswers();
     $('#quizContainer').hide();
     $('#endContainer').show();
