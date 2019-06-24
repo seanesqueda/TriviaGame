@@ -84,7 +84,6 @@ function timeLeft() {
 
 function decrement() {
     t--;
-    console.log(t);
     $('#timeRemaining').text("Time Remaining: " + t);
     //Determining right/wrong answers for quiz
     if (t === 0) {
@@ -145,4 +144,16 @@ $('#submitButton').on("click", function () {
     checkAnswers();
     $('#quizContainer').hide();
     $('#endContainer').show();
+});
+
+$('#retryButton').on("click", function () {
+    $('#questions').empty();
+    $('#endContainer').hide();
+    $('#timeRemaining').text("Time Remaining: 60");
+    $('#quizContainer').show();
+    t = 60;
+    timeRemaining;
+    right = 0;
+    wrong = 0;
+    startQuiz();
 });

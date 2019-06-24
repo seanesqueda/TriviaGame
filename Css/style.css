@@ -91,12 +91,18 @@ label {
     height: 100%;
     color:yellow;
     font-size: 30px;
+    padding-top: 40px;
 }
 
 #questionsRight{
-    padding-top: 15%;
+    padding-top: 6%;
 }
 
 #questionsWrong{
     padding-top: 20px;
+}
+
+#retryButton {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    margin-top: 70px;
 }
