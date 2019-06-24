@@ -1,5 +1,5 @@
 //Global variables
-var timeRemaining = 10;
+var timeRemaining = 60;
 var right = 0;
 var wrong = 0;
 
